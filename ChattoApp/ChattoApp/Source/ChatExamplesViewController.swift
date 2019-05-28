@@ -36,6 +36,7 @@ class ChatExamplesViewController: CellsViewController {
             self.makeChatCellItem(title: "Empty chat", messagesCount: 0),
             self.makeChatCellItem(title: "Chat with 10000 messages", messagesCount: 10_000),
             self.makeChatCellItem(title: "Chat with expandable input", messagesCount: 10_000, shouldUseAlternativePresenter: true),
+            self.makeChatCellItem(title: "Chat with safe photos input", messagesCount: 10_000, shouldUseSafePhotoCells: true),
             self.makeMessageSelectionCellItem(),
             self.makeOpenWithTabBarCellItem(),
             self.makeScrollToBottomCellItem(),
@@ -55,12 +56,13 @@ class ChatExamplesViewController: CellsViewController {
         })
     }
 
-    private func makeChatCellItem(title: String, messagesCount: Int, shouldUseAlternativePresenter: Bool = false) -> CellItem {
+    private func makeChatCellItem(title: String, messagesCount: Int, shouldUseAlternativePresenter: Bool = false, shouldUseSafePhotoCells: Bool = false) -> CellItem {
         return CellItem(title: title, action: { [weak self] in
             let dataSource = DemoChatDataSource(count: messagesCount, pageSize: 50)
             let viewController = AddRandomMessagesChatViewController()
             viewController.dataSource = dataSource
             viewController.shouldUseAlternativePresenter = shouldUseAlternativePresenter
+            viewController.shouldUseSafePhotoCells = shouldUseSafePhotoCells
             self?.navigationController?.pushViewController(viewController, animated: true)
         })
     }

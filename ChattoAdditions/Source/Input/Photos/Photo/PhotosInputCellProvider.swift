@@ -30,10 +30,16 @@ protocol PhotosInputCellProviderProtocol: class {
                                             request: PhotosInputDataProviderImageRequestProtocol)
 }
 
-final class PhotosInputCellProvider: PhotosInputCellProviderProtocol {
+open class PhotosInputCellProvider: PhotosInputCellProviderProtocol {
+
     private let reuseIdentifier = "PhotosCellProvider"
-    private let collectionView: UICollectionView
-    private let dataProvider: PhotosInputDataProviderProtocol
+
+    internal var collectionView: UICollectionView
+    internal var dataProvider: PhotosInputDataProviderProtocol
+
+    internal var previewRequests = [Int: PhotosInputDataProviderImageRequestProtocol]()
+    internal var fullImageRequests = [Int: PhotosInputDataProviderImageRequestProtocol]()
+
     init(collectionView: UICollectionView, dataProvider: PhotosInputDataProviderProtocol) {
         self.dataProvider = dataProvider
         self.collectionView = collectionView
@@ -52,8 +58,6 @@ final class PhotosInputCellProvider: PhotosInputCellProviderProtocol {
         self.configureCellForFullImageLoadingIfNeeded(cell, request: request)
     }
 
-    private var previewRequests = [Int: PhotosInputDataProviderImageRequestProtocol]()
-    private var fullImageRequests = [Int: PhotosInputDataProviderImageRequestProtocol]()
     private func configureCell(_ cell: PhotosInputCell, at indexPath: IndexPath) {
         if let request = self.previewRequests[cell.hash] {
             self.previewRequests[cell.hash] = nil
