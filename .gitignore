@@ -32,3 +32,6 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
+
+## AppCode
+.idea
