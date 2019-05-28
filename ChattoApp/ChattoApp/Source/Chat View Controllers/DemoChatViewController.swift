@@ -28,6 +28,7 @@ import ChattoAdditions
 
 class DemoChatViewController: BaseChatViewController {
     var shouldUseAlternativePresenter: Bool = false
+    var shouldUseSafePhotoCells: Bool = false
 
     var messageSender: DemoChatMessageSender!
     let messagesSelector = BaseMessagesSelector()
@@ -117,7 +118,13 @@ class DemoChatViewController: BaseChatViewController {
     func createChatInputItems() -> [ChatInputItemProtocol] {
         var items = [ChatInputItemProtocol]()
         items.append(self.createTextInputItem())
-        items.append(self.createPhotoInputItem())
+
+        if self.shouldUseSafePhotoCells {
+            items.append(self.createSafePhotoInputItem())
+        } else {
+            items.append(self.createPhotoInputItem())
+        }
+
         if self.shouldUseAlternativePresenter {
             items.append(self.customInputItem())
         }
@@ -134,6 +141,19 @@ class DemoChatViewController: BaseChatViewController {
 
     private func createPhotoInputItem() -> PhotosChatInputItem {
         let item = PhotosChatInputItem(presentingController: self)
+        item.photoInputHandler = { [weak self] image, _ in
+            self?.dataSource.addPhotoMessage(image)
+        }
+        return item
+    }
+
+    private func createSafePhotoInputItem() -> SafePhotosChatInputItem {
+        let item = SafePhotosChatInputItem(
+                presentingController: self,
+                tabInputButtonAppearance: PhotosChatInputItem.createDefaultButtonAppearance(),
+                inputViewAppearance: PhotosChatInputItem.createDefaultInputViewAppearance(),
+                sendButtonText: "Custom!"
+        )
         item.photoInputHandler = { [weak self] image, _ in
             self?.dataSource.addPhotoMessage(image)
         }

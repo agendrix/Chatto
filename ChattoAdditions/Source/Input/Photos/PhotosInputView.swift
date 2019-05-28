@@ -51,19 +51,19 @@ public protocol PhotosInputViewDelegate: AnyObject {
     func inputViewDidRequestPhotoLibraryPermission(_ inputView: PhotosInputViewProtocol)
 }
 
-public final class PhotosInputView: UIView, PhotosInputViewProtocol {
+open class PhotosInputView: UIView, PhotosInputViewProtocol {
 
-    fileprivate struct Constants {
+    internal struct Constants {
         static let liveCameraItemIndex = 0
     }
 
-    fileprivate lazy var collectionViewQueue = SerialTaskQueue()
-    fileprivate var collectionView: UICollectionView!
-    fileprivate var collectionViewLayout: UICollectionViewFlowLayout!
-    fileprivate var dataProvider: PhotosInputDataProviderProtocol!
-    fileprivate var cellProvider: PhotosInputCellProviderProtocol!
-    fileprivate var permissionsRequester: PhotosInputPermissionsRequesterProtocol!
-    fileprivate var itemSizeCalculator: PhotosInputViewItemSizeCalculator!
+    internal lazy var collectionViewQueue = SerialTaskQueue()
+    internal var collectionView: UICollectionView!
+    internal var collectionViewLayout: UICollectionViewFlowLayout!
+    internal var dataProvider: PhotosInputDataProviderProtocol!
+    internal var cellProvider: PhotosInputCellProviderProtocol!
+    internal var permissionsRequester: PhotosInputPermissionsRequesterProtocol!
+    internal var itemSizeCalculator: PhotosInputViewItemSizeCalculator!
 
     var cameraAuthorizationStatus: AVAuthorizationStatus {
         return self.permissionsRequester.cameraAuthorizationStatus
@@ -79,7 +79,7 @@ public final class PhotosInputView: UIView, PhotosInputViewProtocol {
         self.commonInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -155,7 +155,7 @@ public final class PhotosInputView: UIView, PhotosInputViewProtocol {
         self.permissionsRequester.requestAccessToPhotos()
     }
 
-    private func replacePlaceholderItemsWithPhotoItems() {
+     func replacePlaceholderItemsWithPhotoItems() {
         let photosDataProvider = PhotosInputDataProvider()
         photosDataProvider.prepare { [weak self] in
             guard let sSelf = self else { return }
@@ -180,18 +180,18 @@ public final class PhotosInputView: UIView, PhotosInputViewProtocol {
         }
     }
 
-    fileprivate lazy var cameraPicker: PhotosInputCameraPicker = {
+    internal lazy var cameraPicker: PhotosInputCameraPicker = {
         return PhotosInputCameraPicker(presentingControllerProvider: self.presentingControllerProvider)
     }()
 
-    fileprivate lazy var liveCameraPresenter: LiveCameraCellPresenter = {
+    internal lazy var liveCameraPresenter: LiveCameraCellPresenter = {
         return LiveCameraCellPresenter(cellAppearance: self.appearance?.liveCameraCellAppearence ?? LiveCameraCellAppearance.createDefaultAppearance())
     }()
 }
 
 extension PhotosInputView: UICollectionViewDataSource {
 
-    func configureCollectionView() {
+    @objc open func configureCollectionView() {
         self.collectionViewLayout = PhotosInputCollectionViewLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.collectionViewLayout)
         self.collectionView.backgroundColor = UIColor.white
