@@ -38,8 +38,6 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
     open weak var keyboardEventsHandler: KeyboardEventsHandling?
     open weak var scrollViewEventsHandler: ScrollViewEventsHandling?
 
-    public typealias ChatItemCompanionCollection = ReadOnlyOrderedDictionary<ChatItemCompanion>
-
     open var layoutConfiguration: ChatLayoutConfigurationProtocol = ChatLayoutConfiguration.defaultConfiguration {
         didSet {
             self.adjustCollectionViewInsets(shouldUpdateContentOffset: false)
@@ -70,7 +68,7 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
     open var customPresentersConfigurationPoint = false // If true then confugureCollectionViewWithPresenters() will not be called in viewDidLoad() method and has to be called manually
 
     public private(set) var collectionView: UICollectionView?
-    public final internal(set) var chatItemCompanionCollection: ChatItemCompanionCollection = ReadOnlyOrderedDictionary(items: [])
+    public final internal(set) var chatItemCompanionCollection = ChatItemCompanionCollection(items: [])
     private var _chatDataSource: ChatDataSourceProtocol?
     public final var chatDataSource: ChatDataSourceProtocol? {
         get {
@@ -428,6 +426,7 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
         if animated {
             self.isAdjustingInputContainer = true
             self.inputContainerBottomConstraint.constant = max(newValue, self.bottomLayoutGuide.length)
+            CATransaction.begin()
             UIView.animate(
                 withDuration: duration,
                 delay: 0.0,
@@ -435,7 +434,9 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
                 initialSpringVelocity: initialSpringVelocity,
                 options: .curveLinear,
                 animations: { self.view.layoutIfNeeded() },
-                completion: { (_) in callback?() })
+                completion: { _ in })
+            CATransaction.setCompletionBlock(callback) // this callback is guaranteed to be called
+            CATransaction.commit()
             self.isAdjustingInputContainer = false
         } else {
             self.changeInputContentBottomMarginWithoutAnimationTo(newValue, callback: callback)
@@ -452,8 +453,9 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
             UIView.animate(
                 withDuration: duration,
                 animations: { self.view.layoutIfNeeded() },
-                completion: { (_) in callback?() }
+                completion: { _ in }
             )
+            CATransaction.setCompletionBlock(callback) // this callback is guaranteed to be called
             CATransaction.commit()
             self.isAdjustingInputContainer = false
         } else {
