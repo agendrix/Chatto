@@ -24,9 +24,9 @@
 
 import UIKit
 
-final class PhotosInputCell: UICollectionViewCell {
+class PhotosInputCell: UICollectionViewCell {
 
-    private struct Constants {
+    internal struct Constants {
         static let backgroundColor = UIColor(red: 231.0/255.0, green: 236.0/255.0, blue: 242.0/255.0, alpha: 1)
         static let loadingIndicatorBackgoroundColor = UIColor.black.withAlphaComponent(0.70)
         static let loadingIndicatorProgressColor = UIColor.white
@@ -44,7 +44,8 @@ final class PhotosInputCell: UICollectionViewCell {
         self.commonInit()
     }
 
-    private var imageView: UIImageView!
+    internal var imageView: UIImageView!
+    
     private func commonInit() {
         self.clipsToBounds = true
         self.imageView = UIImageView()

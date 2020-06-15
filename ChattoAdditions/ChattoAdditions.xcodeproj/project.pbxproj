@@ -126,6 +126,10 @@
 		EAAFBCF12302DBAF004F553D /* FakeMessageInteractionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFBCF02302DBAF004F553D /* FakeMessageInteractionHandler.swift */; };
 		EAF2678E22BD1524006B3455 /* MessageContentPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2678D22BD1524006B3455 /* MessageContentPresenterProtocol.swift */; };
 		EAF2679022BD2625006B3455 /* DefaultMessageContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2678F22BD2625006B3455 /* DefaultMessageContentPresenter.swift */; };
+		EFE8D0ED24983C09006358E2 /* SafePhotosChatInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE8D0E924983C09006358E2 /* SafePhotosChatInputItem.swift */; };
+		EFE8D0EE24983C09006358E2 /* SafePhotosInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE8D0EA24983C09006358E2 /* SafePhotosInputView.swift */; };
+		EFE8D0EF24983C09006358E2 /* SafePhotosInputCellProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE8D0EB24983C09006358E2 /* SafePhotosInputCellProvider.swift */; };
+		EFE8D0F024983C09006358E2 /* SafePhotosInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE8D0EC24983C09006358E2 /* SafePhotosInputCollectionViewCell.swift */; };
 		F6D04BA71CA46C0200E803FA /* PhotosInputPlaceholderDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D04BA61CA46C0200E803FA /* PhotosInputPlaceholderDataProviderTests.swift */; };
 		F6D04BA91CA46D5000E803FA /* PhotosInputWithPlaceholdersDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D04BA81CA46D5000E803FA /* PhotosInputWithPlaceholdersDataProviderTests.swift */; };
 /* End PBXBuildFile section */
@@ -284,6 +288,10 @@
 		EAAFBCF02302DBAF004F553D /* FakeMessageInteractionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMessageInteractionHandler.swift; sourceTree = "<group>"; };
 		EAF2678D22BD1524006B3455 /* MessageContentPresenterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContentPresenterProtocol.swift; sourceTree = "<group>"; };
 		EAF2678F22BD2625006B3455 /* DefaultMessageContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMessageContentPresenter.swift; sourceTree = "<group>"; };
+		EFE8D0E924983C09006358E2 /* SafePhotosChatInputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePhotosChatInputItem.swift; sourceTree = "<group>"; };
+		EFE8D0EA24983C09006358E2 /* SafePhotosInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePhotosInputView.swift; sourceTree = "<group>"; };
+		EFE8D0EB24983C09006358E2 /* SafePhotosInputCellProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePhotosInputCellProvider.swift; sourceTree = "<group>"; };
+		EFE8D0EC24983C09006358E2 /* SafePhotosInputCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePhotosInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		F6D04BA61CA46C0200E803FA /* PhotosInputPlaceholderDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosInputPlaceholderDataProviderTests.swift; sourceTree = "<group>"; };
 		F6D04BA81CA46D5000E803FA /* PhotosInputWithPlaceholdersDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosInputWithPlaceholdersDataProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -539,6 +547,7 @@
 				C3C0CC0A1BFE496A0052747C /* ExpandableTextView.swift */,
 				C3C0CC0B1BFE496A0052747C /* HorizontalStackScrollView.swift */,
 				C3C0CC0C1BFE496A0052747C /* Photos */,
+				EFE8D0F124983C13006358E2 /* Safe Photos */,
 				C3C0CC161BFE496A0052747C /* ReusableXibView.swift */,
 				C3C9BC8E1D11540D00F3A54E /* TabInputButton.swift */,
 				C3C0CC171BFE496A0052747C /* Text */,
@@ -685,6 +694,17 @@
 				CDC610051FD80C2B00C2588E /* PhotosInputPlaceholderDataProvider.swift */,
 			);
 			path = Placeholder;
+			sourceTree = "<group>";
+		};
+		EFE8D0F124983C13006358E2 /* Safe Photos */ = {
+			isa = PBXGroup;
+			children = (
+				EFE8D0E924983C09006358E2 /* SafePhotosChatInputItem.swift */,
+				EFE8D0EB24983C09006358E2 /* SafePhotosInputCellProvider.swift */,
+				EFE8D0EC24983C09006358E2 /* SafePhotosInputCollectionViewCell.swift */,
+				EFE8D0EA24983C09006358E2 /* SafePhotosInputView.swift */,
+			);
+			path = "Safe Photos";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -844,6 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE8D0EE24983C09006358E2 /* SafePhotosInputView.swift in Sources */,
 				55ABA5631FC7444700923302 /* CGPoint+Additions.swift in Sources */,
 				C3C9BC8F1D11540D00F3A54E /* TabInputButton.swift in Sources */,
 				C3C0CC3B1BFE496A0052747C /* PhotoMessageCollectionViewCellDefaultStyle.swift in Sources */,
@@ -878,6 +899,7 @@
 				268CD5802204876B00DEE2C2 /* CompoundBubbleLayout.swift in Sources */,
 				EAF2679022BD2625006B3455 /* DefaultMessageContentPresenter.swift in Sources */,
 				268CD56321F9F92C00DEE2C2 /* CompoundBubbleViewStyle.swift in Sources */,
+				EFE8D0EF24983C09006358E2 /* SafePhotosInputCellProvider.swift in Sources */,
 				C3C0CC5E1BFE496A0052747C /* PhotosInputView.swift in Sources */,
 				CDC60FFD1FD7259200C2588E /* PhotosInputPlaceholderCell.swift in Sources */,
 				EAF2678E22BD1524006B3455 /* MessageContentPresenterProtocol.swift in Sources */,
@@ -911,12 +933,14 @@
 				EA13CAF6229EE9A6009340C5 /* CircleProgressIndicatorView.swift in Sources */,
 				268CD56221F9F92C00DEE2C2 /* CompoundMessageCollectionViewCell.swift in Sources */,
 				C3C0CC5B1BFE496A0052747C /* PhotosInputCell.swift in Sources */,
+				EFE8D0ED24983C09006358E2 /* SafePhotosChatInputItem.swift in Sources */,
 				C3C0CC561BFE496A0052747C /* HorizontalStackScrollView.swift in Sources */,
 				C3C0CC5F1BFE496A0052747C /* PhotosInputViewItemSizeCalculator.swift in Sources */,
 				C33DEA471D23F8C8002AAD26 /* LiveCameraCaptureSession.swift in Sources */,
 				CDC610041FD80BB900C2588E /* PhotosInputPlaceholderCellProvider.swift in Sources */,
 				C3C0CC301BFE496A0052747C /* ViewDefinitions.swift in Sources */,
 				265E22EB2256398E005330E4 /* PasteActionInterceptor.swift in Sources */,
+				EFE8D0F024983C09006358E2 /* SafePhotosInputCollectionViewCell.swift in Sources */,
 				C3C0CC531BFE496A0052747C /* ChatInputItem.swift in Sources */,
 				C3C0CC421BFE496A0052747C /* TextMessageCollectionViewCell.swift in Sources */,
 				0B44651620347C11001ED5F1 /* DeviceImagePicker.swift in Sources */,
