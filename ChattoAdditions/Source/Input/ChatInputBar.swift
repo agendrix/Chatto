@@ -244,12 +244,21 @@ extension ChatInputBar {
         self.tabBarInterItemSpacing = appearance.tabBarAppearance.interItemSpacing
         self.tabBarContentInsets = appearance.tabBarAppearance.contentInsets
         self.sendButton.contentEdgeInsets = appearance.sendButtonAppearance.insets
-        if (self.sendButton.image(for: UIControl.State()) == nil) {
+        
+        if let sendButtonImage = appearance.sendButtonAppearance.image {
+            self.sendButton.setTitle(nil, for: .normal)
+            
+            appearance.sendButtonAppearance.imageColors.forEach { (state, color) in
+                self.sendButton.setImage(sendButtonImage.bma_tintWithColor(color), for: state.controlState)
+            }
+        } else {
             self.sendButton.setTitle(appearance.sendButtonAppearance.title, for: .normal)
+            
+            appearance.sendButtonAppearance.titleColors.forEach { (state, color) in
+                self.sendButton.setTitleColor(color, for: state.controlState)
+            }
         }
-        appearance.sendButtonAppearance.titleColors.forEach { (state, color) in
-            self.sendButton.setTitleColor(color, for: state.controlState)
-        }
+
         self.sendButton.titleLabel?.font = appearance.sendButtonAppearance.font
         self.sendButton.accessibilityIdentifier = appearance.sendButtonAppearance.accessibilityIdentifier
         self.tabBarContainerHeightConstraint.constant = appearance.tabBarAppearance.height
@@ -323,15 +332,6 @@ extension ChatInputBar: ExpandableTextViewPlaceholderDelegate {
 extension ChatInputBar {
     public func setTopBorderHeight(_ height: CGFloat) {
         self.topBorderHeightConstraint.constant = height
-    }
-    
-    public func setSendButtonImage(_ image: UIImage) {
-        if let tintColor = self.sendButton.titleColor(for: UIControl.State()) {
-            self.sendButton.setImage(image.bma_tintWithColor(tintColor), for: UIControl.State())
-        } else {
-            self.sendButton.setImage(image, for: UIControl.State())
-        }
-        self.sendButton.setTitle(nil, for: .normal)
     }
     
     public func setTextViewPadding(top: CGFloat, leading: CGFloat, trailing: CGFloat, bottom: CGFloat) {

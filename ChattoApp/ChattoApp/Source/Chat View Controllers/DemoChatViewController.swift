@@ -59,6 +59,22 @@ class DemoChatViewController: BaseChatViewController {
         appearance.sendButtonAppearance.title = NSLocalizedString("Send", comment: "")
         appearance.sendButtonAppearance.titleColors = [UIControlStateWrapper.init(state: .normal): .red]
         appearance.textInputAppearance.placeholderText = NSLocalizedString("Type a message", comment: "")
+        
+        if self.shouldCustomizeInputBar {
+            appearance.sendButtonAppearance.image = UIImage(named: "bubble-incoming-tail-border")
+            appearance.sendButtonAppearance.imageColors = [
+                UIControlStateWrapper.init(state: .disabled): .red,
+                UIControlStateWrapper.init(state: .normal): .green
+            ]
+            
+            
+            chatInputView.setTopBorderHeight(0)
+            chatInputView.setTextViewPadding(top: 20, leading: 20, trailing: 20, bottom: 20)
+            
+            chatInputView.inputTextView?.backgroundColor = .blue.withAlphaComponent(0.5)
+            chatInputView.inputTextView?.layer.cornerRadius = 8
+        }
+        
         if self.shouldUseAlternativePresenter {
             let chatInputPresenter = ExpandableChatInputBarPresenter(
                 inputPositionController: self,
@@ -73,15 +89,6 @@ class DemoChatViewController: BaseChatViewController {
         }
         
         chatInputView.maxCharactersCount = 1000
-        
-        if self.shouldCustomizeInputBar {
-            chatInputView.setTopBorderHeight(0)
-            chatInputView.setSendButtonImage(UIImage(named: "bubble-incoming-tail-border")!)
-            chatInputView.setTextViewPadding(top: 20, leading: 20, trailing: 20, bottom: 20)
-            
-            chatInputView.inputTextView?.backgroundColor = .blue.withAlphaComponent(0.5)
-            chatInputView.inputTextView?.layer.cornerRadius = 8
-        }
         
         return chatInputView
     }

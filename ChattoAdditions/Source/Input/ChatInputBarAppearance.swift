@@ -34,6 +34,12 @@ public struct ChatInputBarAppearance {
             UIControlStateWrapper(state: .normal): UIColor.bma_color(rgb: 0x007AFF),
             UIControlStateWrapper(state: .highlighted): UIColor.bma_color(rgb: 0x007AFF).bma_blendWithColor(UIColor.white.withAlphaComponent(0.4))
         ]
+        public var image: UIImage? = nil
+        public var imageColors: [UIControlStateWrapper: UIColor] = [
+            UIControlStateWrapper(state: .disabled): UIColor.bma_color(rgb: 0x9AA3AB),
+            UIControlStateWrapper(state: .normal): UIColor.bma_color(rgb: 0x007AFF),
+            UIControlStateWrapper(state: .highlighted): UIColor.bma_color(rgb: 0x007AFF).bma_blendWithColor(UIColor.white.withAlphaComponent(0.4))
+        ]
         public let accessibilityIdentifier = "chatto.inputbar.button.send"
     }
 
