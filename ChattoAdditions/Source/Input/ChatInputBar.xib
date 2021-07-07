@@ -88,6 +88,10 @@
                 <outlet property="sendButton" destination="hE9-hU-Ci1" id="VFQ-Pb-J37"/>
                 <outlet property="tabBarContainerHeightConstraint" destination="vwa-F7-EIB" id="d3G-fs-hEH"/>
                 <outlet property="textView" destination="fsh-hH-hKG" id="QMH-G9-ADs"/>
+                <outlet property="textViewBottomConstraint" destination="4Vl-vV-gaa" id="PQU-er-Rpy"/>
+                <outlet property="textViewLeadingConstraint" destination="0hb-TC-77u" id="Kg4-Mk-Kao"/>
+                <outlet property="textViewTopConstraint" destination="ZsI-iu-9nR" id="Hjz-fR-iaJ"/>
+                <outlet property="textViewTrailingConstraint" destination="vVY-rg-Rwc" id="hfD-Xf-FyR"/>
                 <outlet property="topBorderHeightConstraint" destination="IIv-qg-Tlp" id="qiB-dH-AHS"/>
                 <outletCollection property="constraintsForVisibleTextView" destination="4Vl-vV-gaa" collectionClass="NSMutableArray" id="rBg-0B-c4B"/>
                 <outletCollection property="constraintsForHiddenTextView" destination="gpt-vU-KzZ" collectionClass="NSMutableArray" id="EzL-hX-Wle"/>

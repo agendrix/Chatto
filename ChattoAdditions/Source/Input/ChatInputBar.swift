@@ -55,12 +55,18 @@ open class ChatInputBar: ReusableXibView {
     public var inputTextView: UITextView? {
         return self.textView
     }
-
+    
     @IBOutlet weak var scrollView: HorizontalStackScrollView!
     @IBOutlet weak var textView: ExpandableTextView!
     @IBOutlet weak var sendButton: UIButton!
+    
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
-
+    
+    @IBOutlet weak var textViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet var constraintsForHiddenTextView: [NSLayoutConstraint]!
     @IBOutlet var constraintsForVisibleTextView: [NSLayoutConstraint]!
 
@@ -238,7 +244,9 @@ extension ChatInputBar {
         self.tabBarInterItemSpacing = appearance.tabBarAppearance.interItemSpacing
         self.tabBarContentInsets = appearance.tabBarAppearance.contentInsets
         self.sendButton.contentEdgeInsets = appearance.sendButtonAppearance.insets
-        self.sendButton.setTitle(appearance.sendButtonAppearance.title, for: .normal)
+        if (self.sendButton.image(for: UIControl.State()) == nil) {
+            self.sendButton.setTitle(appearance.sendButtonAppearance.title, for: .normal)
+        }
         appearance.sendButtonAppearance.titleColors.forEach { (state, color) in
             self.sendButton.setTitleColor(color, for: state.controlState)
         }
@@ -308,5 +316,26 @@ extension ChatInputBar: ExpandableTextViewPlaceholderDelegate {
 
     public func expandableTextViewDidHidePlaceholder(_ textView: ExpandableTextView) {
         self.delegate?.inputBarDidHidePlaceholder(self)
+    }
+}
+
+// MARK: Additionnal customization methods
+extension ChatInputBar {
+    public func setTopBorderHeight(_ height: CGFloat) {
+        self.topBorderHeightConstraint.constant = height
+    }
+    
+    public func setSendButtonImage(_ image: UIImage) {
+        self.sendButton.setImage(image, for: UIControl.State())
+        self.sendButton.setTitle(nil, for: .normal)
+    }
+    
+    public func setTextViewPadding(top: CGFloat, leading: CGFloat, trailing: CGFloat, bottom: CGFloat) {
+        textViewTopConstraint.constant = top
+        textViewLeadingConstraint.constant = leading
+        textViewTrailingConstraint.constant = trailing
+        textViewBottomConstraint.constant = bottom
+        
+        textView.layoutIfNeeded()
     }
 }

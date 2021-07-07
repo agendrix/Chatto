@@ -29,6 +29,7 @@ import ChattoAdditions
 class DemoChatViewController: BaseChatViewController {
     var shouldUseAlternativePresenter: Bool = false
     var shouldUseSafePhotoCells: Bool = false
+    var shouldCustomizeInputBar: Bool = false
 
     var messageSender: DemoChatMessageSender!
     let messagesSelector = BaseMessagesSelector()
@@ -69,7 +70,18 @@ class DemoChatViewController: BaseChatViewController {
         } else {
             self.chatInputPresenter = BasicChatInputBarPresenter(chatInputBar: chatInputView, chatInputItems: self.createChatInputItems(), chatInputBarAppearance: appearance)
         }
+        
         chatInputView.maxCharactersCount = 1000
+        
+        if self.shouldCustomizeInputBar {
+            chatInputView.setTopBorderHeight(0)
+            chatInputView.setSendButtonImage(UIImage(named: "bubble-incoming-tail-border")!)
+            chatInputView.setTextViewPadding(top: 20, leading: 20, trailing: 20, bottom: 20)
+            
+            chatInputView.inputTextView?.backgroundColor = .blue.withAlphaComponent(0.5)
+            chatInputView.inputTextView?.layer.cornerRadius = 8
+        }
+        
         return chatInputView
     }
 
