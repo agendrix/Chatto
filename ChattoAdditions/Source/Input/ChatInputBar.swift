@@ -326,7 +326,11 @@ extension ChatInputBar {
     }
     
     public func setSendButtonImage(_ image: UIImage) {
-        self.sendButton.setImage(image, for: UIControl.State())
+        if let tintColor = self.sendButton.titleColor(for: UIControl.State()) {
+            self.sendButton.setImage(image.bma_tintWithColor(tintColor), for: UIControl.State())
+        } else {
+            self.sendButton.setImage(image, for: UIControl.State())
+        }
         self.sendButton.setTitle(nil, for: .normal)
     }
     
