@@ -36,11 +36,16 @@ open class PhotosChatInputItem: ChatInputItemProtocol {
     public weak var presentingController: UIViewController?
 
     let buttonAppearance: TabInputButtonAppearance
+    let liveCameraCellAppearance: LiveCameraCellAppearance
 
-    public init(presentingController: UIViewController?,
-                tabInputButtonAppearance: TabInputButtonAppearance = PhotosChatInputItem.createDefaultButtonAppearance()) {
+    public init(
+        presentingController: UIViewController?,
+        tabInputButtonAppearance: TabInputButtonAppearance = PhotosChatInputItem.createDefaultButtonAppearance(),
+        liveCameraCellAppearance: LiveCameraCellAppearance = LiveCameraCellAppearance.createDefaultAppearance()
+    ) {
         self.presentingController = presentingController
         self.buttonAppearance = tabInputButtonAppearance
+        self.liveCameraCellAppearance = liveCameraCellAppearance
     }
 
     public static func createDefaultButtonAppearance() -> TabInputButtonAppearance {
@@ -59,7 +64,7 @@ open class PhotosChatInputItem: ChatInputItemProtocol {
     lazy var photosInputView: PhotosInputViewProtocol = {
         let photosInputView = PhotosInputView(
             cameraPickerFactory: PhotosInputCameraPickerFactory(presentingViewControllerProvider: { [weak self] in self?.presentingController }),
-            liveCameraCellPresenterFactory: LiveCameraCellPresenterFactory()
+            liveCameraCellPresenterFactory: LiveCameraCellPresenterFactory(cellAppearance: liveCameraCellAppearance)
         )
         photosInputView.delegate = self
         return photosInputView

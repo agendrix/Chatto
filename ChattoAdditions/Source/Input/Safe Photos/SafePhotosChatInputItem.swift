@@ -16,7 +16,7 @@ open class SafePhotosChatInputItem: PhotosChatInputItem {
         let safePhotosInputView = SafePhotosInputView(
             cameraPickerFactory: PhotosInputCameraPickerFactory(presentingViewControllerProvider: { [weak self] in self?.presentingController
             }),
-            liveCameraCellPresenterFactory: LiveCameraCellPresenterFactory()
+            liveCameraCellPresenterFactory: LiveCameraCellPresenterFactory(cellAppearance: liveCameraCellAppearance)
         )
         
         safePhotosInputView.delegate = self
@@ -31,9 +31,14 @@ open class SafePhotosChatInputItem: PhotosChatInputItem {
     public init(
         presentingController: UIViewController?,
         tabInputButtonAppearance: TabInputButtonAppearance = PhotosChatInputItem.createDefaultButtonAppearance(),
+        liveCameraCellAppearance: LiveCameraCellAppearance = LiveCameraCellAppearance.createDefaultAppearance(),
         sendButtonText: String? = "Send"
     ) {
-        super.init(presentingController: presentingController, tabInputButtonAppearance: tabInputButtonAppearance)
+        super.init(
+            presentingController: presentingController,
+            tabInputButtonAppearance: tabInputButtonAppearance,
+            liveCameraCellAppearance: liveCameraCellAppearance
+        )
         self.sendButtonText = sendButtonText
     }
 

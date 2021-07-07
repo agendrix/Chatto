@@ -185,11 +185,19 @@ class DemoChatViewController: BaseChatViewController {
     }
 
     private func createSafePhotoInputItem() -> SafePhotosChatInputItem {
-        let item = SafePhotosChatInputItem(
-                presentingController: self,
-                tabInputButtonAppearance: PhotosChatInputItem.createDefaultButtonAppearance(),
-                sendButtonText: "Custom!"
+        let liveCameraCellAppearance = LiveCameraCellAppearance(
+            backgroundColor: .red,
+            cameraImage: nil,
+            cameraLockImage: nil
         )
+        
+        let item = SafePhotosChatInputItem(
+            presentingController: self,
+            tabInputButtonAppearance: PhotosChatInputItem.createDefaultButtonAppearance(),
+            liveCameraCellAppearance: liveCameraCellAppearance,
+            sendButtonText: "Custom!"
+        )
+        
         item.photoInputHandler = { [weak self] image, _ in
             self?.dataSource.addPhotoMessage(image)
         }
