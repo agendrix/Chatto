@@ -128,7 +128,10 @@ public class ExpandableChatInputBarPresenter: NSObject, ChatInputBarPresenter {
 
     private var lastKnownKeyboardHeight: CGFloat?
     private var keyboardHeight: CGFloat {
-        return self.lastKnownKeyboardHeight ?? self.defaultKeyboardHeight
+        guard let lastKnownKeyboardHeight = self.lastKnownKeyboardHeight else {
+            return self.defaultKeyboardHeight
+        }
+        return max(lastKnownKeyboardHeight, self.defaultKeyboardHeight)
     }
     private var allowListenToChangeFrameEvents = true
 
